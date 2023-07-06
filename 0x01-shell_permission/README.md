@@ -1,2 +1,1 @@
-#!/bin/bash
-Shell permissions
+0-iam_bety is changing the user using su command
