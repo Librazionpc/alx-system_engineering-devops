@@ -1,0 +1,16 @@
+total 56
+drwxrwxr-x 2 libzpc libzpc 4096 Jul 10 18:24 .
+drwxrwxr-x 6 libzpc libzpc 4096 Jul 10 11:27 ..
+-rwxrw-r-- 1 libzpc libzpc   32 Jul 10 12:32 0-hello_world
+-rwxrw-r-- 1 libzpc libzpc   28 Jul 10 12:59 1-confused_smiley
+-rwxrw-r-- 1 libzpc libzpc   28 Jul 10 15:28 2-hellofile
+-rwxrw-r-- 1 libzpc libzpc   39 Jul 10 15:51 3-twofiles
+-rwxrw-r-- 1 libzpc libzpc   35 Jul 10 17:10 4-lastlines
+-rwxrw-r-- 1 libzpc libzpc   35 Jul 10 17:17 5-firstlines
+-rwxrw-r-- 1 libzpc libzpc   38 Jul 10 17:38 6-third_line
+-rwxrw-r-- 1 libzpc libzpc   82 Jul 10 18:17 7-file
+-rwxrw-r-- 1 libzpc libzpc   37 Jul 10 18:23 8-cwd_state
+-rw-rw-r-- 1 libzpc libzpc   12 Jul 10 18:17 \*\'Best School\'\*$\?\*\*\*\*\*:)
+-rw-rw-r-- 1 libzpc libzpc  744 Jul 10 17:22 iacta
+-rw-rw-r-- 1 libzpc libzpc    0 Jul 10 18:24 ls_cwd_content
+-rw-rw-r-- 1 libzpc libzpc   21 Jul 10 12:36 README.md
