@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+#Bash scripts that prints hour and minutes
+
+h=0
+m=0
+while [ $h -lt 12 ]
+do
+	echo "Hour : $h"
+	while [ $m -lt 60 ]
+	do
+		echo $m
+		((m++))
+	done
+	((h++))
+	m=0
+done

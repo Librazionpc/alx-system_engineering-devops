@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+#Loops through non hidden files in a directory
+
+for file in *
+do
+	if [[ ! $file == .* ]]
+	then
+		echo $file
+	fi
+done
