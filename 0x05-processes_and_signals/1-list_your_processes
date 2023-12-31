@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+# Display header
+
+ps axo user,pid,%cpu,%mem,vsz,rss,tty,stat,time,comm --forest

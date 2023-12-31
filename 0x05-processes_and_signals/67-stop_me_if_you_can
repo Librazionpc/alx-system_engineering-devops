@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+# Look for the process ID (PID) of 7-highlander and send a termination signal (SIGTERM)
+pid=$(pgrep -f "7-highlander")
+
+if [ -n "$pid" ]; then
+    kill "$pid"
+else
+    echo "Process 7-highlander not found"
+fi
