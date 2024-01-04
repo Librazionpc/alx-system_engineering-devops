@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+#Scripts that listen to all port and get thier PIDS
+netstat -lp
