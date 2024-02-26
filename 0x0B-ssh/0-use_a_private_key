@@ -1,0 +1,4 @@
+#!/bin/bash
+#Sripts that uses ssh to connect to your server
+
+ssh -i ~/.ssh/school ubuntu@54.210.88.168
