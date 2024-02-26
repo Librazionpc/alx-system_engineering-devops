@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usrbin/env bash
 #Scripts that creates an RSA key pair
 private_key_name="school"
 
