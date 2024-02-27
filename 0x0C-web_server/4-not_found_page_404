@@ -3,41 +3,8 @@
 sudo apt update
 sudo apt install -y nginx
 
-sudo bash -c 'cat <<EOF > /usr/share/nginx/html/404.html
-<!DOCTYPE html>
-<html>
-<head>
-    <title>404 Not Found</title>
-</head>
-<body>
-    <h1>404 Not Found</h1>
-    <p>Ceci n'est pas une page</p>
-</body>
-</html>
-EOF'
-
-sudo bash -c 'cat <<EOF > /etc/nginx/sites-available/custom_404
-server {
-    listen 80 default_server;
-    listen [::]:80 default_server;
-
-    server_name _;
-
-    error_page 404 /404.html;
-    location = /404.html {
-        root /usr/share/nginx/html;
-        internal;
-    }
-
-    location / {
-        return 301 /index.html;
-    }
-}
-EOF'
-
-sudo ln -s /etc/nginx/sites-available/custom_404 /etc/nginx/sites-enabled/
-
-sudo nginx -t
-
-sudo systemctl reload nginx
-
+echo "Hello World!" | sudo tee /var/www/html/index.html > /dev/null
+sed -i "46i rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;" /etc/nginx/sites-available/default
+echo "Ceci n'est pas une page" | sudo tee /var/www/html/custom_404.html > /dev/null
+sed -i "46i error_page 404 /custom_404.html;" /etc/nginx/sites-available/default
+service nginx restart
