@@ -1,17 +1,15 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #Dealing With Load Balancer setup 
 sudo apt-get update
-sudo apt-get -y nginx
+sudo apt-get install -y nginx
 var=$(hostname)
-new_string1="error_page 404 \/custom_404.html;\n location \/redirect_me {\n return 301 \$scheme:\/\/www.google.com;"
-new_string2="server {\n\tadd_header X-Served-By $var;"
-
-sudo apt-get update -y
-sudo apt-get install nginx -y
-
-echo "Hello World" > /usr/www/html/index.html
-mkdir -p /var/www/html
-echo "Ceci n'est pas une page" > /var/www/html/custom_404.html
-sudo sed -i -E "s/^[^#]+location \/ \{/$new_string/" /etc/nginx/sites-available/default
-sudo sed -i -E "s/^server \{/$new_string2/" /etc/nginx/sites-available/default
-sudo service nginx start
+sudo chown "$USER":"$USER" /var/www/
+sudo chmod -R 777 /var/www
+sudo echo "Hello World" > /var/www/html/index.nginx-debian.html
+sudo echo "Ceci n'est pas une page" > /var/www/html/custom_404.html
+sudo sed -i -E "46i \\\tadd_header X-Served-By $var;" /etc/nginx/sites-available/default
+sudo service nginx restart
+~                                                                                                                                                     
+~                                                                                                                                                     
+~                                                                                                                                                     
+~                              
