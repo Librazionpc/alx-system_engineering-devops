@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #  Run Nginx as Nginx  
 chmod ugo+wrx /etc/apache2/ports.conf /etc/nginx/nginx.conf
 sed -i 's/Listen 8080/#Listen 8080/g' /etc/apache2/ports.conf
