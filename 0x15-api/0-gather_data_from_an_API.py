@@ -11,20 +11,21 @@ def get_emloyee_progress(employee_id):
     """Function that uses restapi to get employee todo status"""
 
     base_url = "https://jsonplaceholder.typicode.com"
-    user_url = f'{base_url}/users/{employee_id}'
-    todo_url = f'{base_url}/todos?userId={employee_id}'
+    session_req = requests.Session()
 
     try:
-        user_respons = requests.get(user_url)
-        todo_respons = requests.get(todo_url)
+        id_url = '{}/users/{}/todos'.format(base_url, employee_id)
+        name_url = '{}/users/{}'.format(base_url, employee_id)
+        id_response = session_req.get(id_url)
+        name_response = session_req.get(name_url)
 
-        us_data = user_respons.json()
-        todos_data = todo_respons.json()
+        id_data = id_response.json()
+        name_data = name_response.json()
 
-        Dn_task = [task["title"] for task in todos_data if task["completed"]]
-        total = len(todos_data)
+        Dn_task = [task["title"] for task in id_data if task["completed"]]
+        total = len(id_data)
 
-        print(f"Employee {us_data['name']} is done with tasks("
+        print(f"Employee {name_data['name']} is done with tasks("
               f"{len(Dn_task)}/{total}):")
 
         for task in Dn_task:
