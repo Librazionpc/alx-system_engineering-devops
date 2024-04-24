@@ -7,7 +7,6 @@ import requests
 from sys import argv, exit
 
 
-
 def get_emloyee_progress(employee_id):
     """Function that uses restapi to get employee todo status"""
 
