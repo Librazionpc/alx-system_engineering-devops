@@ -3,8 +3,9 @@
 Write a Python script that, using this REST API, for a given employee ID,
 returns information about his/her TODO list progress."""
 
-from sys import argv, exit
 import requests
+from sys import argv, exit
+
 
 
 def get_emloyee_progress(employee_id):
