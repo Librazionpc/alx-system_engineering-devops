@@ -10,28 +10,24 @@ from sys import argv, exit
 def get_emloyee_progress(employee_id):
     """Function that uses restapi to get employee todo status"""
 
-    user_url = "https://jsonplaceholder.typicode.com/users"
-    todo_url = "https://jsonplaceholder.typicode.com/todos"
+    base_url = "https://jsonplaceholder.typicode.com"
+    user_url = f'{base_url}/users'
+    todo_url = f'{base_url}/todos?userId={employee_id}'
 
     try:
-        user_respons = requests.get(user_url).json()
-        todo_respons = requests.get(todo_url).json()
+        user_respons = requests.get(user_url)
+        todo_respons = requests.get(todo_url)
 
-        
-        mployee_name = None
-        for user in user_respons:
-            if user['id'] == int(employee_id):
-                employee_name = user['name']
-                break
-        
-        if employee_name is None:
-            print(f"Error: Employee with ID {employee_id} not found")
-            exit(1)
-        
-        Dn_task = [task["title"] for task in todo_respons if task["userId"] == int(employee_id) and task['completed']]
-        total = len(todo_respons) + sum(1 for task in todo_respons if task['userId'] == int(employee_id))
+        us_data = user_respons.json()
+        todos_data = todo_respons.json()
+        name = None
+        for i in us_data:
+            if i['id'] == employee_id:
+                name = i['name']
+        Dn_task = [task["title"] for task in todos_data if task["completed"]]
+        total = len(todos_data)
 
-        print(f"Employee {employee_name} is done with tasks("
+        print(f"Employee {name} is done with tasks("
               f"{len(Dn_task)}/{total}):")
 
         for task in Dn_task:
