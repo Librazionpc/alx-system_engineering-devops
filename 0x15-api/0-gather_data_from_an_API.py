@@ -10,26 +10,28 @@ from sys import argv, exit
 def get_emloyee_progress(employee_id):
     """Function that uses restapi to get employee todo status"""
 
-    base_url = 'https://jsonplaceholder.typicode.com'
-    session_req = requests.Session()
+    base_url = "https://jsonplaceholder.typicode.com"
+    user_url = f'{base_url}/users/{employee_id}'
+    todo_url = f'{base_url}/todos?userId={employee_id}'
 
-    id_url = f'{base_url}/users/{employee_id}/todos'
-    name_url = f'{base_url}/users/{employee_id}'
+    try:
+        user_respons = requests.get(user_url)
+        todo_respons = requests.get(todo_url)
 
-    employee_response = session_req.get(id_url)
-    employee_name_response = session_req.get(name_url)
+        us_data = user_respons.json()
+        todos_data = todo_respons.json()
 
-    employee_data = employee_response.json()
-    employee_name = employee_name_response.json()['name']
+        Dn_task = [task["title"] for task in todos_data if task["completed"]]
+        total = len(todos_data)
 
-    total_tasks = len(employee_data)
-    completed_tasks = sum(1 for task in employee_data if task['completed'])
+        print(f"Employee {us_data['name']} is done with tasks("
+              f"{len(Dn_task)}/{total}):")
 
-    print(f"Employee {employee_name} is done with tasks({completed_tasks}/{total_tasks}):")
-
-    for task in employee_data:
-        if task['completed']:
-            print(f"\t{task['title']}")
+        for task in Dn_task:
+            print(f"\t{task}")
+    except requests.exceptions.RequestException as e:
+        print(f"Error: {e}")
+        exit(1)
 
 
 if __name__ == "__main__":
