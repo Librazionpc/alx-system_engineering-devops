@@ -14,8 +14,7 @@ def number_of_subscribers(subreddit):
     headers = {"User-Agent": "Google Chrome Version 81.0.4044.129"}
 
     try:
-        response = requests.get(url, headers=headers, allow_redirects=False)
-
+        response = requests.get(url, headers=headers)
         if response.status_code == 200:
             data = response.json()
             subscribers = data.get('data', {}).get('subscribers', 0)
