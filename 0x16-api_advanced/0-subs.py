@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-# Learning about api's usong reddit platform
+"""
+number of subscribers for a given subreddit
+"""
 import requests
 
 
