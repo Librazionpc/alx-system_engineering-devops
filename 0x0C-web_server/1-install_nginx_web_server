@@ -1,6 +1,32 @@
-#!/usr/bin/env bash
-#Scripts that installs nginx on server
-sudo apt-get -y update
-sudo apt-get -y install nginx
-echo 'Hello World!' > /var/www/html/index.nginx-debian.html
-sudo service nginx start
+#!/bin/bash
+
+# Check if script is running as root
+if [[ $EUID -ne 0 ]]; then
+   echo "This script must be run as root" 
+   exit 1
+fi
+
+# Update package list and install nginx with -y option
+apt-get update
+apt-get install nginx -y
+
+# Ensure nginx is installed and running
+if ! command -v nginx &> /dev/null; then
+    echo "Nginx installation failed or not found. Please check logs."
+    exit 1
+fi
+
+# Modify nginx configuration to listen on port 80
+if [ -f /etc/nginx/sites-available/default ]; then
+    sed -i 's/# listen 80/listen 80/' /etc/nginx/sites-available/default
+else
+    echo "Nginx configuration file not found. Exiting."
+    exit 1
+fi
+
+# Reload nginx configuration without systemctl
+kill -s HUP $(pgrep -f nginx)
+
+# Create index.html with 'Hello World!' content
+echo "Hello World!" > /var/www/html/index.html
+
