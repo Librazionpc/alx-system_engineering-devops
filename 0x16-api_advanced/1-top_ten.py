@@ -1,23 +1,26 @@
 #!/usr/bin/python3
-"""Define top ten function"""
+"""Define number of subscribers function"""
 import requests
 
-
-def top_ten(subreddit):
-    """
-    Query the Reddit API and prints the titles of the first 10 hot posts
-    """
-    url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
+def number_of_subscribers(subreddit):
+    """Query the Reddit API and returns the number of subscribers"""
+    url = "https://www.reddit.com/r/{}/about.json".format(subreddit)
     headers = {
         "User-Agent": "linux:0x016.project:v1.0.0 (by /u/ecalvoc)"
-        }
-    params = {"limit": 10}
-    top_data = requests.get(url,
-                            headers=headers,
-                            params=params,
-                            allow_redirects=False).json().get("data")
-    if top_data:
-        childrens = top_data.get("children")
-        [print(children.get("data").get("title")) for children in childrens]
-        return
-    print("None")
+    }
+    try:
+        response = requests.get(url, headers=headers, allow_redirects=False)
+        if response.status_code != 200:
+            return 0
+        subreddit_data = response.json().get("data")
+        if subreddit_data:
+            return subreddit_data.get("subscribers")
+        return 0
+    except requests.RequestException as e:
+        # Handle network-related errors
+        print(f"Request error: {e}")
+        return 0
+    except ValueError:
+        # Handle JSON decoding errors
+        print("Error decoding JSON")
+        return 0
